@@ -2,6 +2,8 @@ package com.worldpay.controller;
 
 import java.util.List;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,9 @@ import com.worldpay.model.EmpModel;
 
 @Controller
 public class EmpController {
+	
+	@Autowired
+	private EmpDAO DAO;
 	
 	@RequestMapping("InsertPage")
 	public ModelAndView insertPage() {
@@ -40,7 +45,7 @@ public class EmpController {
 	@RequestMapping("AddEmp")
 	public ModelAndView insertEmp(@ModelAttribute("info") EmpModel emp) {
 		
-		EmpDAO DAO = new EmpDAO();
+		//EmpDAO DAO = new EmpDAO();
 		DAO.insertEmp(emp);
 		ModelAndView mv = new 	ModelAndView("AddSuccess");
 		return mv;
@@ -49,7 +54,7 @@ public class EmpController {
 	@RequestMapping("RetriveAll")
 	public ModelAndView retriveAll() {
 		System.out.println("@@@@@@@@@@@ reached controller @@@@@@@@@@@@@@@@@@@@@@");
-		EmpDAO DAO = new EmpDAO();
+		//EmpDAO DAO = new EmpDAO();
 		List<EmpModel> EmpList = DAO.viewAll();
 		ModelAndView mv = new ModelAndView("AllEmp");
 		mv.addObject("EmpList", EmpList);
@@ -60,7 +65,7 @@ public class EmpController {
 	@RequestMapping("empSearch")
 	public ModelAndView empSearch(int eno){
 		
-		EmpDAO DAO = new EmpDAO();
+		//EmpDAO DAO = new EmpDAO();
 		EmpModel emp = DAO.empSearch(eno);
 		ModelAndView mv = new ModelAndView("searchResult");
 		mv.addObject("emp", emp);
@@ -71,7 +76,7 @@ public class EmpController {
 	@RequestMapping("deleteEmp")
 	public ModelAndView deleteEmp(int eno) {
 	
-		EmpDAO DAO = new EmpDAO();
+		//EmpDAO DAO = new EmpDAO();
 		EmpModel emp = DAO.empSearch(eno);
 		DAO.deleteEmp(eno);
 		ModelAndView mv = new ModelAndView("deleteResult");
@@ -81,7 +86,7 @@ public class EmpController {
 	
 	@RequestMapping("updateEmp")
 	public ModelAndView updateEmp(int eno,String ename,int sal) {
-		EmpDAO DAO = new EmpDAO();
+		//EmpDAO DAO = new EmpDAO();
 		EmpModel emp = DAO.empSearch(eno);
 		DAO.updateEmp(emp, ename, sal);
 		ModelAndView mv = new ModelAndView("updateResult");
